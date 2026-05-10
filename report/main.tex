@@ -3,9 +3,9 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath}
 \usepackage{booktabs}
+\usepackage{float}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\usepackage{placeins}
 \usepackage[numbers]{natbib}
 
 \title{Modeling the First COVID-19 Wave in Hubei with a Simple SIR Model}
@@ -37,7 +37,7 @@ The data come from the Johns Hopkins CSSE COVID-19 time series repository \cite{
 
 The original dataset reports cumulative confirmed cases by date. I also compute daily new cases by differencing the cumulative counts. Figure \ref{fig:daily} shows the reported daily new cases. One noticeable feature is the large reporting jump in mid-February 2020. This is important because the model is smooth, but reported data can change suddenly due to testing capacity or case definition changes.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/hubei_daily_cases.png}
     \caption{Daily new confirmed COVID-19 cases in Hubei from January 22, 2020 to April 30, 2020. The black curve shows a 7-day rolling average.}
@@ -97,7 +97,7 @@ The value of $N_{\mathrm{eff}}$ should not be interpreted as the full population
 
 Figure \ref{fig:fit} compares the fitted SIR cumulative case curve with the reported cumulative confirmed cases. The model captures the broad S-shaped pattern of the first wave, but it does not capture abrupt reporting changes exactly.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/hubei_sir_fit.png}
     \caption{Fitted SIR model compared with observed cumulative confirmed cases in Hubei.}
@@ -114,14 +114,14 @@ The time-varying transmission model improved the scaled least squares fit cost f
 \]
 Since day 0 is January 22, 2020, the fitted transition midpoint corresponds to about February 15, 2020. Under this model, $\beta(t)$ decreases from about $0.810$ early in the outbreak to about $0.532$ by the end of the study period. The corresponding ratio $\beta(t)/\gamma$ decreases from about $1.24$ to about $0.82$.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/hubei_constant_vs_time_varying_sir_fit.png}
     \caption{Comparison of the constant-$\beta$ SIR fit and the time-varying $\beta(t)$ SIR fit.}
     \label{fig:timevaryingfit}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/hubei_time_varying_beta.png}
     \caption{Estimated time-varying transmission rate $\beta(t)$ from the logistic-decline SIR model.}
@@ -130,14 +130,14 @@ Since day 0 is January 22, 2020, the fitted transition midpoint corresponds to a
 
 The counterfactual simulations show that lowering the transmission rate reduces the peak number of model daily cases and delays the peak. Figure \ref{fig:counterfactual} shows the daily case curves under each transmission scenario.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/hubei_counterfactual_scenarios.png}
     \caption{Counterfactual SIR simulations with the fitted transmission rate and 10\%, 20\%, and 30\% lower transmission rates.}
     \label{fig:counterfactual}
 \end{figure}
 
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \begin{tabular}{lrrr}
         \toprule
@@ -167,7 +167,9 @@ Overall, the simple SIR model is useful for approximating the broad shape of the
 
 A simple SIR model can approximate the broad cumulative case pattern of the first reported COVID-19 wave in Hubei. Allowing $\beta(t)$ to decline over time improves the fit and gives a more realistic interpretation of changing transmission during the outbreak. In addition, reducing the transmission rate in counterfactual simulations lowers the daily case peak and delays its timing. The project shows how a basic mathematical model can connect real data to a scientific question, while also making clear that reported COVID-19 dynamics are more complicated than the assumptions of a standard SIR system.
 
-\FloatBarrier
+\section*{Code Availability}
+
+The code and project files are available in the \href{https://github.com/Hans-Yin/Intro-to-Math-Modeling-Final-Project/}{GitHub repository}.
 
 \bibliographystyle{plainnat}
 \bibliography{references}
