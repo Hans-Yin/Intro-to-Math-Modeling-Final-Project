@@ -6,3 +6,9 @@ __pycache__/
 venv/
 env/
 .env
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
